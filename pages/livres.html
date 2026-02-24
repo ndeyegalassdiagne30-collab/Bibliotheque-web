@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub - Guide Complet des Concepts Essentiels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+            padding: 30px 20px;
+        }
+
+        .presentation {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .header .meta {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 1.1em;
+            color: #94a3b8;
+        }
+
+        /* Navigation rapide */
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            background: white;
+            border-radius: 40px;
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95em;
+        }
+
+        .nav-item:hover {
+            background: #0f172a;
+            color: white;
+            border-color: #0f172a;
+            transform: translateY(-2px);
+        }
+
+        /* Sections principales */
+        .section {
+            padding: 50px 40px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: #0f172a;
+            margin-bottom: 30px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+        }
+
+        /* Grille pour les concepts */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .concept-card {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 30px;
+            transition: transform 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .concept-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .concept-card h3 {
+            font-size: 1.6em;
+            color: #0f172a;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .concept-card .definition {
+            color: #475569;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .example-box {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .example-box h4 {
+            color: #3b82f6;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .example-box pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-purple {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        /* Tableau comparatif */
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .workflow-col {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .workflow-col h3 {
+            font-size: 1.8em;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .workflow-col h4 {
+            color: #475569;
+            margin: 20px 0 10px;
+            font-size: 1.2em;
+        }
+
+        .branch-list {
+            list-style: none;
+        }
+
+        .branch-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .branch-name {
+            font-family: monospace;
+            background: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: #0f172a;
+            font-weight: 500;
+        }
+
+        /* Convention de branches */
+        .branch-conventions {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 24px;
+            padding: 40px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .branch-conventions h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .convention-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .convention-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .convention-item h4 {
+            color: #94a3b8;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .convention-item .example {
+            font-family: monospace;
+            font-size: 1.1em;
+            color: #cbd5e1;
+            margin: 10px 0;
+        }
+
+        .convention-item .desc {
+            color: #94a3b8;
+            font-size: 0.95em;
+        }
+
+        /* Workflow visuel */
+        .workflow-visual {
+            background: #f1f5f9;
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: 20px 15px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .arrow {
+            color: #94a3b8;
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        /* Pied de page */
+        .footer {
+            background: #f1f5f9;
+            padding: 40px;
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-steps {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+            
+            .section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Header -->
+        <div class="header">
+            <h1>Git & GitHub</h1>
+            <div class="subtitle">Guide complet des concepts essentiels pour la collaboration et le versionnement</div>
+            <div class="meta">
+                <span>Version 2.0</span>
+                <span>•</span>
+                <span>Guide pratique</span>
+                <span>•</span>
+                <span>Exemples concrets</span>
+            </div>
+        </div>
+
+        <!-- Navigation rapide -->
+        <div class="quick-nav">
+            <a href="#fork" class="nav-item">Fork</a>
+            <a href="#pull-request" class="nav-item">Pull Request</a>
+            <a href="#review" class="nav-item">Review</a>
+            <a href="#issues" class="nav-item">Issues</a>
+            <a href="#git-flow" class="nav-item">Git Flow</a>
+            <a href="#github-flow" class="nav-item">GitHub Flow</a>
+            <a href="#branches" class="nav-item">Convention de branches</a>
+        </div>
+
+        <!-- Section 1: Concepts fondamentaux -->
+        <div class="section" id="fondamentaux">
+            <h2 class="section-title">Concepts fondamentaux de collaboration</h2>
+            
+            <div class="concepts-grid">
+                <!-- Fork -->
+                <div class="concept-card" id="fork">
+                    <div class="concept-icon"></div>
+                    <h3>Fork</h3>
+                    <p class="definition">Opération qui crée une copie indépendante d'un dépôt sur votre compte GitHub, tout en conservant l'historique complet des commits.</p>
+                    
+                    <div class="example-box">
+                        <h4>Cas d'usage typique</h4>
+                        <pre>
+# Situation : Contribuer à React (projet Facebook)
+1. Visitez : github.com/facebook/react
+2. Cliquez sur le bouton "Fork" (en haut à droite)
+3. Sélectionnez votre compte utilisateur
+4. Résultat : github.com/votre-compte/react
+
+# Le fork crée une copie complète :
+- Historique des commits préservé
+- Lien vers l'original conservé
+- Possibilité de synchroniser les mises à jour</pre>
+                    </div>
+                    
+                    <div>
+                        <span class="badge badge-blue">Open Source</span>
+                        <span class="badge badge-purple">Contribution</span>
+                    </div>
+                    
+                    <p style="margin-top: 15px; color: #475569;">
+                        <strong>Avantages :</strong> Permet de travailler librement sans affecter le projet original, idéal pour proposer des modifications via Pull Request.
+                    </p>
+                </div>
+
+                <!-- Pull Request -->
+                <div class="concept-card" id="pull-request">
+                    <div class="concept-icon"></div>
+                    <h3>Pull Request (PR)</h3>
+                    <p class="definition">Mécanisme de proposition de modifications permettant de demander l'intégration de vos changements dans la branche principale d'un projet.</p>
+                    
+                    <div class="example-box">
+                        <h4>Processus complet</h4>
+                        <pre>
+# 1. Après avoir poussé vos modifications
+git push origin feature/ma-fonctionnalite
+
+# 2. Sur GitHub, créer la Pull Request
+- Aller dans l'onglet "Pull requests"
+- Cliquer "New pull request"
+- Sélectionner : base: main <- compare: feature/ma-fonctionnalite
+
+# 3. Remplir le template
+Titre: [Feature] Ajout système d'authentification
+Description:
+- Implémentation de JWT
+- Tests unitaires ajoutés
+- Documentation mise à jour
+
+# 4. Assigner des reviewers
+# 5. Ajouter des labels (enhancement, needs-review)</pre>
+                    </div>
+                    
+                    <p style="margin-top: 15px;">
+                        <strong>Bonnes pratiques :</strong> PR petites et focalisées, description claire, liens vers les issues concernées.
+                    </p>
+                </div>
+
+                <!-- Review -->
+                <div class="concept-card" id="review">
+                    <div class="concept-icon"></div>
+                    <h3>Code Review</h3>
+                    <p class="definition">Processus d'examination du code par les pairs pour garantir la qualité, détecter les bugs et partager les connaissances.</p>
+                    
+                    <div class="example-box">
+                        <h4>Exemple de revue constructive</h4>
+                        <pre>
+// Fichier: auth.js - Ligne 42
+function validateUser(input) {
+    // AVANT: Risque de faille XSS
+    return input; 
+    
+    // SUGGESTION: Nettoyer les entrées utilisateur
+    return sanitizeHtml(input);
+}
+
+// Commentaire du reviewer :
+// "Bonne logique globale ! 
+//  Attention à la sécurité : suggestion d'ajouter 
+//  une sanitization des entrées.
+//  Voir OWASP Top 10 - A7:2017-Cross-Site Scripting"
+
+// Réponse de l'auteur :
+// "Correction effectuée ! Merci pour la vigilance."</pre>
+                    </div>
+                    
+                    <p><strong>Critères de revue :</strong> Architecture, sécurité, performance, tests, lisibilité, conventions.</p>
+                </div>
+
+                <!-- Issues -->
+                <div class="concept-card" id="issues">
+                    <div class="concept-icon"></div>
+                    <h3>Issues</h3>
+                    <p class="definition">Système de suivi intégré pour gérer bugs, fonctionnalités, tâches et discussions autour du projet.</p>
+                    
+                    <div class="example-box">
+                        <h4>Template d'issue bien structuré</h4>
+                        <pre>
+---
+Titre: [BUG] Erreur 500 sur page de connexion
+---
+
+**Description du bug**
+Lors de la tentative de connexion avec des identifiants valides, une erreur 500 apparaît.
+
+**Étapes pour reproduire**
+1. Aller sur /login
+2. Entrer email: user@test.com
+3. Entrer mot de passe: correct123
+4. Cliquer sur "Se connecter"
+5. Voir l'erreur 500
+
+**Comportement attendu**
+Redirection vers le tableau de bord
+
+**Environnement**
+- Navigateur: Chrome 120
+- OS: macOS 14
+- Version de l'API: v2.1.0
+
+**Logs d'erreur**
+TypeError: Cannot read property 'id' of undefined
+    at authenticate (auth.js:45)
+
+**Labels** : bug, haute-priorité, auth</pre>
+                    </div>
+                    
+                    <p><strong>Types d'issues :</strong> Bug, Feature, Documentation, Discussion, Question, Tâche technique.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Workflows de branches -->
+        <div class="section" id="workflows">
+            <h2 class="section-title">Workflows de gestion de branches</h2>
+            
+            <div class="comparison-table">
+                <!-- Git Flow -->
+                <div class="workflow-col" id="git-flow">
+                    <h3>Git Flow</h3>
+                    <p style="color: #475569; margin-bottom: 25px;">Workflow structuré pour projets avec cycles de release planifiés.</p>
+                    
+                    <h4>Branches principales</h4>
+                    <ul class="branch-list">
+                        <li><span class="branch-name">main</span> - Code en production, version stable</li>
+                        <li><span class="branch-name">develop</span> - Intégration des fonctionnalités</li>
+                    </ul>
+                    
+                    <h4>Branches de support</h4>
+                    <ul class="branch-list">
+                        <li><span class="branch-name">feature/*</span> - Nouvelles fonctionnalités</li>
+                        <li><span class="branch-name">release/*</span> - Préparation des releases</li>
+                        <li><span class="branch-name">hotfix/*</span> - Corrections urgentes</li>
+                    </ul>
+                    
+                    <div class="example-box" style="margin-top: 20px;">
+                        <h4>Scénario complet</h4>
+                        <pre>
+# Développement d'une fonctionnalité
+git checkout -b feature/paiement-stripe develop
+# Travail sur la fonctionnalité...
+git commit -m "Ajout intégration Stripe"
+git push origin feature/paiement-stripe
+# Merge dans develop après review
+git checkout develop
+git merge --no-ff feature/paiement-stripe
+
+# Préparation d'une release
+git checkout -b release/1.2.0 develop
+# Tests, corrections de bugs mineurs
+git commit -m "Fix: correction typo dans emails"
+# Fusion dans main et develop
+git checkout main
+git merge --no-ff release/1.2.0
+git tag -a v1.2.0 -m "Version 1.2.0"
+git checkout develop
+git merge --no-ff release/1.2.0
+
+# Hotfix critique
+git checkout -b hotfix/security-patch main
+git commit -m "Fix: faille de sécurité critique"
+git checkout main
+git merge --no-ff hotfix/security-patch
+git tag -a v1.2.1 -m "Patch sécurité urgent"
+git checkout develop
+git merge --no-ff hotfix/security-patch</pre>
+                    </div>
+                    
+                    <p><strong>Quand l'utiliser :</strong> Applications avec versions, maintenance multiple versions, équipes structurées.</p>
+                </div>
+
+                <!-- GitHub Flow -->
+                <div class="workflow-col" id="github-flow">
+                    <h3>GitHub Flow</h3>
+                    <p style="color: #475569; margin-bottom: 25px;">Workflow simplifié pour déploiement continu.</p>
+                    
+                    <h4>Branche unique</h4>
+                    <ul class="branch-list">
+                        <li><span class="branch-name">main</span> - Toujours déployable</li>
+                    </ul>
+                    
+                    <h4>Branches temporaires</h4>
+                    <ul class="branch-list">
+                        <li><span class="branch-name">feature/*</span> - Fonctionnalités</li>
+                        <li><span class="branch-name">fix/*</span> - Corrections</li>
+                    </ul>
+                    
+                    <div class="example-box" style="margin-top: 20px;">
+                        <h4>Cycle de développement continu</h4>
+                        <pre>
+# 1. Créer une branche depuis main
+git checkout main
+git pull origin main
+git checkout -b feature/ajout-recherche
+
+# 2. Développer avec commits réguliers
+git add .
+git commit -m "Ajout composant barre recherche"
+git commit -m "Intégration API Elasticsearch"
+git commit -m "Tests unitaires pour recherche"
+
+# 3. Pousser et créer Pull Request
+git push origin feature/ajout-recherche
+# Sur GitHub : créer PR vers main
+
+# 4. Phase de review
+# - Discussions sur le code
+# - Modifications demandées
+# - Approbation
+
+# 5. Tests automatisés (CI)
+# - Linting
+# - Tests unitaires
+# - Build
+
+# 6. Merge et déploiement
+# Après merge automatique dans main
+# Déploiement automatique en production
+# Suppression de la branche
+
+# 7. Monitoring
+# Surveiller les métriques post-déploiement
+# Prêt pour itérer</pre>
+                    </div>
+                    
+                    <p><strong>Idéal pour :</strong> Startups, SaaS, projets web, équipes agiles, déploiements fréquents.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Convention de branches -->
+        <div class="section" id="branches">
+            <h2 class="section-title">Conventions de nommage des branches</h2>
+            
+            <div class="branch-conventions">
+                <h3>Standards de nommage</h3>
+                
+                <div class="convention-examples">
+                    <div class="convention-item">
+                        <h4>Feature branches</h4>
+                        <div class="example">feature/authentification-jwt</div>
+                        <div class="example">feature/42-panier-achat</div>
+                        <div class="desc">Nouvelles fonctionnalités, format: feature/description-courte</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Bugfix branches</h4>
+                        <div class="example">bugfix/correction-login</div>
+                        <div class="example">bugfix/123-erreur-paiement</div>
+                        <div class="desc">Corrections de bugs, format: bugfix/issue-description</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Hotfix branches</h4>
+                        <div class="example">hotfix/securite-urgente</div>
+                        <div class="example">hotfix/1.2.1-patch-critique</div>
+                        <div class="desc">Corrections urgentes en production</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Release branches</h4>
+                        <div class="example">release/1.2.0</div>
+                        <div class="example">release/v2.0.0-beta</div>
+                        <div class="desc">Préparation des versions</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Chore branches</h4>
+                        <div class="example">chore/mise-jour-deps</div>
+                        <div class="example">chore/refactor-documentation</div>
+                        <div class="desc">Tâches de maintenance</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Experiment branches</h4>
+                        <div class="example">experiment/nouveau-design</div>
+                        <div class="example">wip/algorithme-optimise</div>
+                        <div class="desc">POCs et expérimentations</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px; background: rgba(255,255,255,0.1); padding: 25px; border-radius: 16px;">
+                    <h4 style="color: white; margin-bottom: 15px;">Règles d'or</h4>
+                    <ul style="list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Une branche = un objectif
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Noms en minuscules
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Utiliser des tirets (-)
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Inclure numéro d'issue si possible
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Descriptif mais concis
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Supprimer après merge
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Workflow visuel complet -->
+        <div class="section">
+            <h2 class="section-title">Workflow collaboratif typique</h2>
+            
+            <div class="workflow-visual">
+                <div class="flow-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Issue créée</div>
+                        <div class="step-desc">Bug signalé ou fonctionnalité demandée</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Branche dédiée</div>
+                        <div class="step-desc">feature/ ou bugfix/ depuis main</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Développement</div>
+                        <div class="step-desc">Commits réguliers et tests</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Pull Request</div>
+                        <div class="step-desc">Description détaillée, reviewers</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-title">Code Review</div>
+                        <div class="step-desc">Feedback et itérations</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-title">Tests CI</div>
+                        <div class="step-desc">Validation automatique</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">7</div>
+                        <div class="step-title">Merge & Deploy</div>
+                        <div class="step-desc">Intégration et déploiement</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #f1f5f9; border-radius: 16px; padding: 30px; margin-top: 30px;">
+                <h3 style="color: #0f172a; margin-bottom: 15px;">Commandes Git essentielles pour ce workflow</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div>
+                        <strong>Création</strong>
+                        <pre style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 8px; margin-top: 5px;">git checkout -b feature/nom</pre>
+                    </div>
+                    <div>
+                        <strong>Mise à jour</strong>
+                        <pre style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 8px; margin-top: 5px;">git pull origin main</pre>
+                    </div>
+                    <div>
+                        <strong>Publication</strong>
+                        <pre style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 8px; margin-top: 5px;">git push origin feature/nom</pre>
+                    </div>
+                    <div>
+                        <strong>Fusion</strong>
+                        <pre style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 8px; margin-top: 5px;">git merge feature/nom</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Bonnes pratiques -->
+        <div class="section">
+            <h2 class="section-title">Bonnes pratiques et recommandations</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                <div style="background: #f8fafc; padding: 25px; border-radius: 16px;">
+                    <h3 style="color: #0f172a; margin-bottom: 15px;">Pour les Pull Requests</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;">✓ PR de taille raisonnable (max 400 lignes)</li>
+                        <li style="margin-bottom: 10px;">✓ Description claire du contexte</li>
+                        <li style="margin-bottom: 10px;">✓ Screenshots pour les UI</li>
+                        <li style="margin-bottom: 10px;">✓ Liens vers les issues concernées</li>
+                        <li style="margin-bottom: 10px;">✓ Checklist de validation</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 25px; border-radius: 16px;">
+                    <h3 style="color: #0f172a; margin-bottom: 15px;">Pour les Reviews</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;">✓ Commentaires constructifs</li>
+                        <li style="margin-bottom: 10px;">✓ Suggérer, pas imposer</li>
+                        <li style="margin-bottom: 10px;">✓ Vérifier les tests</li>
+                        <li style="margin-bottom: 10px;">✓ Attention à la sécurité</li>
+                        <li style="margin-bottom: 10px;">✓ Valider dans les 24h</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 25px; border-radius: 16px;">
+                    <h3 style="color: #0f172a; margin-bottom: 15px;">Pour les Issues</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;">✓ Templates standardisés</li>
+                        <li style="margin-bottom: 10px;">✓ Labels pour catégoriser</li>
+                        <li style="margin-bottom: 10px;">✓ Milestones pour planifier</li>
+                        <li style="margin-bottom: 10px;">✓ Assigner clairement</li>
+                        <li style="margin-bottom: 10px;">✓ Fermer avec # dans commit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="font-size: 1.2em; margin-bottom: 15px;">Guide complet des concepts Git et GitHub</p>
+            <p>Ce document présente les concepts fondamentaux pour une collaboration efficace en équipe.</p>
+            <p style="margin-top: 20px; color: #94a3b8;">Version 2.0 - Dernière mise à jour : 2024</p>
+        </div>
+    </div>
+</body>
+</html>
+    <div class="div">
+    <ul>
+        <li>livre1</li>
+        <li>livre2</li>
+        <li>livre3</li>
+        <li>livre4</li>
+        <li>livre5</li>
+    </ul>
+    <ol>
+        <li>
+            <li>livre1</li>
+            <li>livre2</li>
+            <li>livre3</li> 
+            <li>livre4</li>
+            <li>livre5</li>
+        </li>
+    </ol>
+    <a href="livres.css">page css</a>
+    </div>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub - Guide Complet des Concepts Essentiels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+            padding: 30px 20px;
+        }
+
+        .presentation {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .header .meta {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 1.1em;
+            color: #94a3b8;
+        }
+
+        /* Navigation rapide */
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            background: white;
+            border-radius: 40px;
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95em;
+        }
+
+        .nav-item:hover {
+            background: #0f172a;
+            color: white;
+            border-color: #0f172a;
+            transform: translateY(-2px);
+        }
+
+        /* Sections principales */
+        .section {
+            padding: 50px 40px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: #0f172a;
+            margin-bottom: 30px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+        }
+
+        /* Grille pour les concepts */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .concept-card {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 30px;
+            transition: transform 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .concept-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .concept-card h3 {
+            font-size: 1.6em;
+            color: #0f172a;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .concept-card .definition {
+            color: #475569;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .example-box {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .example-box h4 {
+            color: #3b82f6;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .example-box pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-purple {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        /* Tableau comparatif */
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .workflow-col {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .workflow-col h3 {
+            font-size: 1.8em;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .workflow-col h4 {
+            color: #475569;
+            margin: 20px 0 10px;
+            font-size: 1.2em;
+        }
+
+        .branch-list {
+            list-style: none;
+        }
+
+        .branch-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .branch-name {
+            font-family: monospace;
+            background: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: #0f172a;
+            font-weight: 500;
+        }
+
+        /* Convention de branches */
+        .branch-conventions {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 24px;
+            padding: 40px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .branch-conventions h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .convention-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .convention-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .convention-item h4 {
+            color: #94a3b8;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .convention-item .example {
+            font-family: monospace;
+            font-size: 1.1em;
+            color: #cbd5e1;
+            margin: 10px 0;
+        }
+
+        .convention-item .desc {
+            color: #94a3b8;
+            font-size: 0.95em;
+        }
+
+        /* Workflow visuel */
+        .workflow-visual {
+            background: #f1f5f9;
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: 20px 15px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .arrow {
+            color: #94a3b8;
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        /* Pied de page */
+        .footer {
+            background: #f1f5f9;
+            padding: 40px;
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-steps {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+            
+            .section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Header -->
+        <div class="header">
+            <h1>Git & GitHub</h1>
+            <div class="subtitle">Guide complet des concepts essentiels pour la collaboration et le versionnement</div>
+            <div class="meta">
+                <span>Version 2.0</span>
+                <span>•</span>
+                <span>Guide pratique</span>
+                <span>•</span>
+                <span>Exemples concrets</span>
+            </div>
+        </div>
+
+        <!-- Navigation rapide -->
+        <div class="quick-nav">
+            <a href="#fork" class="nav-item">Fork</a>
+            <a href="#pull-request" class="nav-item">Pull Request</a>
+            <a href="#review" class="nav-item">Review</a>
+            <a href="#issues" class="nav-item">Issues</a>
+            <a href="#git-flow" class="nav-item">Git Flow</a>
+            <a href="#github-flow" class="nav-item">GitHub Flow</a>
+            <a href="#branches" class="nav-item">Convention de branches</a>
+        </div>
+
+        <!-- Section 1: Concepts fondamentaux -->
+        <div class="section" id="fondamentaux">
+            <h2 class="section-title">Concepts fondamentaux de collaboration</h2>
+            
+            <div class="concepts-grid">
+                <!-- Fork -->
+                <div class="concept-card" id="fork">
+                    <div class="concept-icon"></div>
+                    <h3>Fork</h3>
+                    <p class="definition">Opération qui crée une copie indépendante d'un dépôt sur votre compte GitHub, tout en conservant l'historique complet des commits.</p>
+                    
+                    <div class="example-box">
+                        <h4>Cas d'usage typique</h4>
+                        <pre>
+# Situation : Contribuer à React (projet Facebook)
+1. Visitez : github.com/facebook/react
+2. Cliquez sur le bouton "Fork" (en haut à droite)
+3. Sélectionnez votre compte utilisateur
+4. Résultat : github.com/votre-compte/react
+
+# Le fork crée une copie complète :
+- Historique des commits préservé
+- Lien vers l'original conservé
+- Possibilité de synchroniser les mises à jour</pre>
+                    </div>
+                    
+                    <div>
+                        <span class="badge badge-blue">Open Source</span>
+                        <span class="badge badge-purple">Contribution</span>
+                    </div>
+                    
+                    <p style="margin-top: 15px; color: #475569;">
+                        <strong>Avantages :</strong> Permet de travailler librement sans affecter le projet original, idéal pour proposer des modifications via Pull Request.
+                    </p>
+                </div>
+
+                <!-- Pull Request -->
+                <div class="concept-card" id="pull-request">
+                    <div class="concept-icon"></div>
+                    <h3>Pull Request (PR)</h3>
+                    <p class="definition">Mécanisme de proposition de modifications permettant de demander l'intégration de vos changements dans la branche principale d'un projet.</p>
+                    
+                    <div class="example-box">
+                        <h4>Processus complet</h4>
+                        <pre>
+# 1. Après avoir poussé vos modifications
+git push origin feature/ma-fonctionnalite
+
+# 2. Sur GitHub, créer la Pull Request
+- Aller dans l'onglet "Pull requests"
+- Cliquer "New pull request"
+- Sélectionner : base: main <- compare: feature/ma-fonctionnalite
+
+# 3. Remplir le template
+Titre: [Feature] Ajout système d'authentification
+Description:
+- Implémentation de JWT
+- Tests unitaires ajoutés
+- Documentation mise à jour
+
+# 4. Assigner des reviewers
+# 5. Ajouter des labels (enhancement, needs-review)</pre>
+                    </div>
+                    
+                    <p style="margin-top: 15px;">
+                        <strong>Bonnes pratiques :</strong> PR petites et focalisées, description claire, liens vers les issues concernées.
+                    </p>
+                </div>
+
+                <!-- Review -->
+                <div class="concept-card" id="review">
+                    <div class="concept-icon"></div>
+                    <h3>Code Review</h3>
+                    <p class="definition">Processus d'examination du code par les pairs pour garantir la qualité, détecter les bugs et partager les connaissances.</p>
+                    
+                    <div class="example-box">
+                        <h4>Exemple de revue constructive</h4>
+                        <pre>
+// Fichier: auth.js - Ligne 42
+function validateUser(input) {
+    // AVANT: Risque de faille XSS
+    return input; 
+    
+    // SUGGESTION: Nettoyer les entrées utilisateur
+    return sanitizeHtml(input);
+}
+
+// Commentaire du reviewer :
+// "Bonne logique globale ! 
+//  Attention à la sécurité : suggestion d'ajouter 
+//  une sanitization des entrées.
+//  Voir OWASP Top 10 - A7:2017-Cross-Site Scripting"
+
+// Réponse de l'auteur :
+// "Correction effectuée ! Merci pour la vigilance."</pre>
+                    </div>
+                    
+                    <p><strong>Critères de revue :</strong> Architecture, sécurité, performance, tests, lisibilité, conventions.</p>
+                </div>
+
+                <!-- Issues -->
+                <div class="concept-card" id="issues">
+                    <div class="concept-icon"></div>
+                    <h3>Issues</h3>
+                    <p class="definition">Système de suivi intégré pour gérer bugs, fonctionnalités, tâches et discussions autour du projet.</p>
+                    
+                    <div class="example-box">
+                        <h4>Template d'issue bien structuré</h4>
+                        <pre>
+---
+Titre: [BUG] Erreur 500 sur page de connexion
+---
+
+**Description du bug**
+Lors de la tentative de connexion avec des identifiants valides, une erreur 500 apparaît.
+
+**Étapes pour reproduire**
+1. Aller sur /login
+2. Entrer email: user@test.com
+3. Entrer mot de passe: correct123
+4. Cliquer sur "Se connecter"
+5. Voir l'erreur 500
+
+**Comportement attendu**
+Redirection vers le tableau de bord
+
+**Environnement**
+- Navigateur: Chrome 120
+- OS: macOS 14
+- Version de l'API: v2.1.0
+
+**Logs d'erreur**
+TypeError: Cannot read property 'id' of undefined
+    at authenticate (auth.js:45)
+
+**Labels** : bug, haute-priorité, auth</pre>
+                    </div>
+                    
+                    <p><strong>Types d'issues :</strong> Bug, Feature, Documentation, Discussion, Question, Tâche technique.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Workflows de branches -->
+        <div class="section" id="workflows">
+            <h2 class="section-title">Workflows de gestion de branches</h2>
+            
+            <div class="comparison-table">
+                <!-- Git Flow -->
+                <div class="workflow-col" id="git-flow">
+                    <h3>Git Flow</h3>
+                    <p style="color: #475569; margin-bottom: 25px;">Workflow structuré pour projets avec cycles de release planifiés.</p>
+                    
+                    <h4>Branches principales</h4>
+                    <ul class="branch-list">
+                        <li><span class="branch-name">main</span> - Code en production, version stable</li>
+                        <li><span class="branch-name">develop</span> - Intégration des fonctionnalités</li>
+                    </ul>
+                    
+                    <h4>Branches de support</h4>
+                    <ul class="branch-list">
+                        <li><span class="branch-name">feature/*</span> - Nouvelles fonctionnalités</li>
+                        <li><span class="branch-name">release/*</span> - Préparation des releases</li>
+                        <li><span class="branch-name">hotfix/*</span> - Corrections urgentes</li>
+                    </ul>
+                    
+                    <div class="example-box" style="margin-top: 20px;">
+                        <h4>Scénario complet</h4>
+                        <pre>
+# Développement d'une fonctionnalité
+git checkout -b feature/paiement-stripe develop
+# Travail sur la fonctionnalité...
+git commit -m "Ajout intégration Stripe"
+git push origin feature/paiement-stripe
+# Merge dans develop après review
+git checkout develop
+git merge --no-ff feature/paiement-stripe
+
+# Préparation d'une release
+git checkout -b release/1.2.0 develop
+# Tests, corrections de bugs mineurs
+git commit -m "Fix: correction typo dans emails"
+# Fusion dans main et develop
+git checkout main
+git merge --no-ff release/1.2.0
+git tag -a v1.2.0 -m "Version 1.2.0"
+git checkout develop
+git merge --no-ff release/1.2.0
+
+# Hotfix critique
+git checkout -b hotfix/security-patch main
+git commit -m "Fix: faille de sécurité critique"
+git checkout main
+git merge --no-ff hotfix/security-patch
+git tag -a v1.2.1 -m "Patch sécurité urgent"
+git checkout develop
+git merge --no-ff hotfix/security-patch</pre>
+                    </div>
+                    
+                    <p><strong>Quand l'utiliser :</strong> Applications avec versions, maintenance multiple versions, équipes structurées.</p>
+                </div>
+
+                <!-- GitHub Flow -->
+                <div class="workflow-col" id="github-flow">
+                    <h3>GitHub Flow</h3>
+                    <p style="color: #475569; margin-bottom: 25px;">Workflow simplifié pour déploiement continu.</p>
+                    
+                    <h4>Branche unique</h4>
+                    <ul class="branch-list">
+                        <li><span class="branch-name">main</span> - Toujours déployable</li>
+                    </ul>
+                    
+                    <h4>Branches temporaires</h4>
+                    <ul class="branch-list">
+                        <li><span class="branch-name">feature/*</span> - Fonctionnalités</li>
+                        <li><span class="branch-name">fix/*</span> - Corrections</li>
+                    </ul>
+                    
+                    <div class="example-box" style="margin-top: 20px;">
+                        <h4>Cycle de développement continu</h4>
+                        <pre>
+# 1. Créer une branche depuis main
+git checkout main
+git pull origin main
+git checkout -b feature/ajout-recherche
+
+# 2. Développer avec commits réguliers
+git add .
+git commit -m "Ajout composant barre recherche"
+git commit -m "Intégration API Elasticsearch"
+git commit -m "Tests unitaires pour recherche"
+
+# 3. Pousser et créer Pull Request
+git push origin feature/ajout-recherche
+# Sur GitHub : créer PR vers main
+
+# 4. Phase de review
+# - Discussions sur le code
+# - Modifications demandées
+# - Approbation
+
+# 5. Tests automatisés (CI)
+# - Linting
+# - Tests unitaires
+# - Build
+
+# 6. Merge et déploiement
+# Après merge automatique dans main
+# Déploiement automatique en production
+# Suppression de la branche
+
+# 7. Monitoring
+# Surveiller les métriques post-déploiement
+# Prêt pour itérer</pre>
+                    </div>
+                    
+                    <p><strong>Idéal pour :</strong> Startups, SaaS, projets web, équipes agiles, déploiements fréquents.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Convention de branches -->
+        <div class="section" id="branches">
+            <h2 class="section-title">Conventions de nommage des branches</h2>
+            
+            <div class="branch-conventions">
+                <h3>Standards de nommage</h3>
+                
+                <div class="convention-examples">
+                    <div class="convention-item">
+                        <h4>Feature branches</h4>
+                        <div class="example">feature/authentification-jwt</div>
+                        <div class="example">feature/42-panier-achat</div>
+                        <div class="desc">Nouvelles fonctionnalités, format: feature/description-courte</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Bugfix branches</h4>
+                        <div class="example">bugfix/correction-login</div>
+                        <div class="example">bugfix/123-erreur-paiement</div>
+                        <div class="desc">Corrections de bugs, format: bugfix/issue-description</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Hotfix branches</h4>
+                        <div class="example">hotfix/securite-urgente</div>
+                        <div class="example">hotfix/1.2.1-patch-critique</div>
+                        <div class="desc">Corrections urgentes en production</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Release branches</h4>
+                        <div class="example">release/1.2.0</div>
+                        <div class="example">release/v2.0.0-beta</div>
+                        <div class="desc">Préparation des versions</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Chore branches</h4>
+                        <div class="example">chore/mise-jour-deps</div>
+                        <div class="example">chore/refactor-documentation</div>
+                        <div class="desc">Tâches de maintenance</div>
+                    </div>
+                    
+                    <div class="convention-item">
+                        <h4>Experiment branches</h4>
+                        <div class="example">experiment/nouveau-design</div>
+                        <div class="example">wip/algorithme-optimise</div>
+                        <div class="desc">POCs et expérimentations</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px; background: rgba(255,255,255,0.1); padding: 25px; border-radius: 16px;">
+                    <h4 style="color: white; margin-bottom: 15px;">Règles d'or</h4>
+                    <ul style="list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Une branche = un objectif
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Noms en minuscules
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Utiliser des tirets (-)
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Inclure numéro d'issue si possible
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Descriptif mais concis
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #3b82f6;">✓</span> Supprimer après merge
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Workflow visuel complet -->
+        <div class="section">
+            <h2 class="section-title">Workflow collaboratif typique</h2>
+            
+            <div class="workflow-visual">
+                <div class="flow-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Issue créée</div>
+                        <div class="step-desc">Bug signalé ou fonctionnalité demandée</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Branche dédiée</div>
+                        <div class="step-desc">feature/ ou bugfix/ depuis main</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Développement</div>
+                        <div class="step-desc">Commits réguliers et tests</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Pull Request</div>
+                        <div class="step-desc">Description détaillée, reviewers</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-title">Code Review</div>
+                        <div class="step-desc">Feedback et itérations</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-title">Tests CI</div>
+                        <div class="step-desc">Validation automatique</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="step">
+                        <div class="step-number">7</div>
+                        <div class="step-title">Merge & Deploy</div>
+                        <div class="step-desc">Intégration et déploiement</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: #f1f5f9; border-radius: 16px; padding: 30px; margin-top: 30px;">
+                <h3 style="color: #0f172a; margin-bottom: 15px;">Commandes Git essentielles pour ce workflow</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div>
+                        <strong>Création</strong>
+                        <pre style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 8px; margin-top: 5px;">git checkout -b feature/nom</pre>
+                    </div>
+                    <div>
+                        <strong>Mise à jour</strong>
+                        <pre style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 8px; margin-top: 5px;">git pull origin main</pre>
+                    </div>
+                    <div>
+                        <strong>Publication</strong>
+                        <pre style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 8px; margin-top: 5px;">git push origin feature/nom</pre>
+                    </div>
+                    <div>
+                        <strong>Fusion</strong>
+                        <pre style="background: #0f172a; color: #e2e8f0; padding: 10px; border-radius: 8px; margin-top: 5px;">git merge feature/nom</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Bonnes pratiques -->
+        <div class="section">
+            <h2 class="section-title">Bonnes pratiques et recommandations</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                <div style="background: #f8fafc; padding: 25px; border-radius: 16px;">
+                    <h3 style="color: #0f172a; margin-bottom: 15px;">Pour les Pull Requests</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;">✓ PR de taille raisonnable (max 400 lignes)</li>
+                        <li style="margin-bottom: 10px;">✓ Description claire du contexte</li>
+                        <li style="margin-bottom: 10px;">✓ Screenshots pour les UI</li>
+                        <li style="margin-bottom: 10px;">✓ Liens vers les issues concernées</li>
+                        <li style="margin-bottom: 10px;">✓ Checklist de validation</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 25px; border-radius: 16px;">
+                    <h3 style="color: #0f172a; margin-bottom: 15px;">Pour les Reviews</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;">✓ Commentaires constructifs</li>
+                        <li style="margin-bottom: 10px;">✓ Suggérer, pas imposer</li>
+                        <li style="margin-bottom: 10px;">✓ Vérifier les tests</li>
+                        <li style="margin-bottom: 10px;">✓ Attention à la sécurité</li>
+                        <li style="margin-bottom: 10px;">✓ Valider dans les 24h</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 25px; border-radius: 16px;">
+                    <h3 style="color: #0f172a; margin-bottom: 15px;">Pour les Issues</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;">✓ Templates standardisés</li>
+                        <li style="margin-bottom: 10px;">✓ Labels pour catégoriser</li>
+                        <li style="margin-bottom: 10px;">✓ Milestones pour planifier</li>
+                        <li style="margin-bottom: 10px;">✓ Assigner clairement</li>
+                        <li style="margin-bottom: 10px;">✓ Fermer avec # dans commit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="font-size: 1.2em; margin-bottom: 15px;">Guide complet des concepts Git et GitHub</p>
+            <p>Ce document présente les concepts fondamentaux pour une collaboration efficace en équipe.</p>
+            <p style="margin-top: 20px; color: #94a3b8;">Version 2.0 - Dernière mise à jour : 2024</p>
+        </div>
+    </div>
+</body>
+</html>
+</body>
+</html>
